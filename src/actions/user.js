@@ -3,7 +3,7 @@ const endpoint = "http://localhost:4000/api/v1"
 export const getUsers = () => {
     return dispatch => fetch(endpoint + "/users")
     .then(resp => resp.json())
-    .then(users => dispatch({type: GET_USERS, payload: users}))
+    .then(users => dispatch({type: "GET_USERS", payload: users}))
 }
 
 export const getUser = (id) => {
@@ -35,6 +35,18 @@ export const submitSignup = (user) => {
 
 }
 
+function handleUserResponse(res, dispatch) {
+    if (res.ok){
+        res.json()
+        .then(response => {
+            localStorage.token = response.token
+            dispatch({type: "SET_USER", payload: response.user})
+        })
+    } else {
+        res.json()
+        .then(res => alert(res.errors))
+    }
+}
 
 export const submitLogin = (user) => {
      return dispatch => fetch(endpoint + "/login", { 
@@ -48,9 +60,21 @@ export const submitLogin = (user) => {
   
 }
 
+
+
 export const logout = () => {
     return dispatch => {
         localStorage.clear()
         dispatch({type: "LOGOUT"})
     }
+}
+
+export const jwtLogin = () => {
+    return dispatch => fetch(endpoint + "/hello", {
+      headers: {
+          'Authorization': localStorage.token
+      }  
+    })
+    .then(resp => handleUserResponse(resp, dispatch))
+    
 }
