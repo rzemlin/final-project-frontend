@@ -1,8 +1,8 @@
-const endpoint = "http://localhost:4000/api/v1"
+//const endpoint = "http://localhost:4000/api/v1"
 
 export const addComment = (comment, post_id) => {
     
-   return dispatch => fetch(endpoint + `/${post_id}/comments`, {
+   return dispatch => fetch(`http://localhost:4000/api/v1/${post_id}/comments`, {
      method: 'POST', 
      headers: {
        'Content-Type': 'application/json',

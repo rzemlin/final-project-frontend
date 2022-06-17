@@ -1,20 +1,20 @@
-const endpoint = "http://localhost:4000/api/v1"
+//const endpoint = "http://localhost:4000/api/v1"
 
 export const getPosts = () => {
-    return dispatch => fetch(endpoint + "/posts")
+    return dispatch => fetch("http://localhost:4000/api/v1/posts")
       .then(resp => resp.json())
       .then(posts => dispatch({ type: 'GET_POSTS', payload: posts}))
   }
   
 
   export const getPost = (id) => {
-    return dispatch => fetch(endpoint + `/posts/${id}`)
+    return dispatch => fetch(`http://localhost:4000/api/v1/posts/${id}`)
       .then(resp => resp.json())
       .then(post => dispatch({ type: 'GET_POST', payload: post}))
   }
 
   export const addPost = post => {
-     return dispatch => fetch(endpoint + "/posts", {
+     return dispatch => fetch("http://localhost:4000/api/v1/posts", {
        method: "POST",
        headers: {
          'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export const getPosts = () => {
   }
 
   export const deletePost = (post_id) => {
-    return dispatch => fetch(endpoint + `/${post_id}`, {
+    return dispatch => fetch(`http://localhost:4000/api/v1/${post_id}`, {
       method: 'DELETE', 
       headers: {
         'Content_Type': 'application/json',

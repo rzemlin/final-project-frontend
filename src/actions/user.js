@@ -1,13 +1,13 @@
-const endpoint = "http://localhost:4000/api/v1"
+//const endpoint = "http://localhost:4000/api/v1"
 
 export const getUsers = () => {
-    return dispatch => fetch(endpoint + "/users")
+    return dispatch => fetch("http://localhost:4000/api/v1/users")
     .then(resp => resp.json())
     .then(users => dispatch({type: "GET_USERS", payload: users}))
 }
 
 export const getUser = (id) => {
-    return dispatch => fetch(endpoint + `/users/${id}`, {
+    return dispatch => fetch(`http://localhost:4000/api/v1/users/${id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export const getUser = (id) => {
 }
 
 export const submitSignup = (user) => {
-    return dispatch => fetch(endpoint + "/signup", {
+    return dispatch => fetch("http://localhost:4000/api/v1/signup", {
     method: 'POST',
     headers: {
          'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ function handleUserResponse(res, dispatch) {
 }
 
 export const submitLogin = (user) => {
-     return dispatch => fetch(endpoint + "/login", { 
+     return dispatch => fetch("http://localhost:4000/api/v1/login", { 
      method: 'POST',
      headers: {
          'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export const logout = () => {
 }
 
 export const jwtLogin = () => {
-    return dispatch => fetch(endpoint + "/hello", {
+    return dispatch => fetch("http://localhost:4000/api/v1/hello", {
       headers: {
           'Authorization': localStorage.token
       }  
